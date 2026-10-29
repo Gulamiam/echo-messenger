@@ -14,9 +14,11 @@ const anchorScrollOptions = {
     easing: (t: number) => -(Math.cos(Math.PI * t) - 1) / 2,
 };
 
-export function ScrollArea({children, className}: Readonly<{
+export function ScrollArea({children, className, startAtEnd = false}: Readonly<{
     children: React.ReactNode;
     className?: string;
+    // Открыть прокрученным до конца — для ленты сообщений, где самые новые внизу
+    startAtEnd?: boolean;
 }>) {
     const contentRef = useRef<HTMLDivElement>(null);
     const lenisRef = useRef<Lenis | null>(null);
@@ -31,6 +33,13 @@ export function ScrollArea({children, className}: Readonly<{
             events={{
                 // Lenis вешаем на viewport, который создаёт OverlayScrollbars
                 initialized: (instance) => {
+                    // Прокручиваем до создания Lenis: он берёт стартовую позицию из вьюпорта,
+                    // и лента сразу оказывается внизу, без видимой прокрутки от начала
+                    if (startAtEnd) {
+                        const viewport = instance.elements().viewport;
+                        viewport.scrollTop = viewport.scrollHeight;
+                    }
+
                     lenisRef.current?.destroy();
                     lenisRef.current = new Lenis({
                         respectReducedMotion: true,

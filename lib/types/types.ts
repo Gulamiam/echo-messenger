@@ -50,7 +50,25 @@ export interface Attachment {
 export interface Avatar {
     initials: string;              // "АС"
     color: string;                 // var(--avatar-3), выбирается по хешу id
+    textColor: string;             // цвет инициалов: на тёмных аватарах белый, на светлых тёмный
+    nameColor: string;             // цвет имени автора в ленте — читаемый на светлом фоне
     image: string | null;
+}
+
+export interface Person {        // строка в поиске людей при создании чата
+    id: UserId;
+    name: string;
+    username: string | null;
+    isBot: boolean;
+    avatar: Avatar;
+}
+
+export interface ChatDetails {   // шапка открытого чата
+    id: ChatId;
+    title: string;
+    subtitle: string;              // «5 участников» у группы, «@ник» у личного чата
+    avatar: Avatar;
+    isGroup: boolean;
 }
 
 export interface ChatPreview {   // строка в списке чатов

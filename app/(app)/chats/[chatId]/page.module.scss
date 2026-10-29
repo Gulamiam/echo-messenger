@@ -1,0 +1,246 @@
+// Стили открытого чата. Их же подключают loading.tsx и not-found.tsx этого сегмента
+.conversation{
+  display: flex;
+  flex-direction: column;
+  flex: 1;
+  min-height: 0;
+
+  .conversation__header{
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-start;
+    align-items: center;
+    gap: 14px;
+    padding: 14px 24px;
+    border-bottom: 1px solid var(--color-border);
+    background: var(--color-bg);
+  }
+
+  .conversation__info{
+    display: flex;
+    flex-direction: column;
+    flex: 1;
+    min-width: 0;
+    gap: 2px;
+  }
+
+  .conversation__title{
+    margin: 0;
+    font-size: 18px;
+    font-weight: 700;
+    line-height: 1.3;
+  }
+
+  .conversation__subtitle{
+    margin: 0;
+    font-size: 14px;
+    color: var(--color-text-secondary);
+  }
+
+  .conversation__feed{
+    flex: 1;
+    min-height: 0;
+
+    // Пока сообщений мало, лента прижата к полю ввода, как в любом мессенджере, а не висит сверху.
+    // Контент ScrollArea растягиваем на всю высоту, а сообщения внутри — к низу
+    .scroll-area__content{
+      display: flex;
+      flex-direction: column;
+      min-height: 100%;
+    }
+  }
+
+  .conversation__messages{
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-end;
+    flex: 1;
+    width: 100%;
+    max-width: 860px;
+    margin: 0 auto;
+    padding: 20px 24px 12px;
+    gap: 10px;
+
+    // Сообщение и строка статуса под ним. Свои — у правого края, как и сам пузырь
+    .conversation__item{
+      display: flex;
+      flex-direction: column;
+      align-items: flex-start;
+      width: 100%;
+
+      &.conversation__item_mine{
+        align-items: flex-end;
+      }
+    }
+
+    .conversation__status{
+      margin: 4px 8px 0;
+      padding: 0;
+      background: none;
+      font: inherit;
+      font-size: 12px;
+      color: var(--color-text-disabled);
+
+      &.conversation__status_failed{
+        color: var(--color-error-text);
+        font-weight: 600;
+        cursor: pointer;
+        text-decoration: underline;
+        text-underline-offset: 2px;
+      }
+    }
+
+    // Длинное сообщение не растягивается на всю ленту — так его легче читать
+    .message__text{
+      max-width: min(560px, 82%);
+    }
+
+    // Чужие пузыри в ленте белые, а не цвета фона, как на лендинге: лента сама светло-серая
+    .message:not(.message_mine) .message__text{
+      background: var(--color-surface);
+    }
+  }
+}
+
+// Скелетон ленты, пока грузится чат. Шапка и пузыри повторяют раскладку настоящей ленты, чтобы ничего не прыгало
+.conversation-skeleton{
+  display: flex;
+  flex-direction: column;
+  flex: 1;
+  min-height: 0;
+
+  .conversation-skeleton__header{
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    gap: 12px;
+    padding: 14px 24px;
+    border-bottom: 1px solid var(--color-border);
+    background: var(--color-bg);
+  }
+
+  .conversation-skeleton__avatar{
+    width: 44px;
+    height: 44px;
+    border-radius: 50%;
+    background: var(--color-skeleton);
+  }
+
+  .conversation-skeleton__lines{
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+  }
+
+  .conversation-skeleton__line{
+    width: 160px;
+    height: 14px;
+    border-radius: 7px;
+    background: var(--color-skeleton);
+
+    &.conversation-skeleton__line_short{
+      width: 100px;
+      height: 10px;
+      border-radius: 5px;
+      background: var(--color-surface-muted);
+    }
+  }
+
+  .conversation-skeleton__feed{
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-end;
+    flex: 1;
+    width: 100%;
+    max-width: 860px;
+    margin: 0 auto;
+    padding: 20px 24px;
+    gap: 10px;
+  }
+
+  .conversation-skeleton__bubble{
+    height: 42px;
+    border-radius: 20px 20px 20px 6px;
+    background: var(--color-surface-muted);
+    animation: conversation-skeleton-pulse 1.4s ease-in-out infinite;
+
+    &.conversation-skeleton__bubble_mine{
+      align-self: flex-end;
+      border-radius: 20px 20px 6px 20px;
+      background: var(--color-border-input);
+    }
+
+    &.conversation-skeleton__bubble_tall{
+      height: 64px;
+    }
+  }
+}
+
+@keyframes conversation-skeleton-pulse{
+  50%{
+    opacity: 0.55;
+  }
+}
+
+// Мигание раздражает тех, кто отключил анимации в системе, — им показываем неподвижный скелетон
+@media (prefers-reduced-motion: reduce){
+  .conversation-skeleton .conversation-skeleton__bubble{
+    animation: none;
+  }
+}
+
+// 404: чата нет или пользователь в нём не состоит
+.chat-not-found{
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  flex: 1;
+  margin: 24px;
+  padding: 40px;
+  gap: 16px;
+  border-radius: 24px;
+  background: var(--color-ink);
+  color: var(--color-on-ink);
+  text-align: center;
+
+  .chat-not-found__code{
+    font-family: Unbounded, sans-serif;
+    font-weight: 800;
+    font-size: 112px;
+    line-height: 0.9;
+    letter-spacing: -0.05em;
+
+    span{
+      color: var(--color-accent);
+    }
+  }
+
+  .chat-not-found__title{
+    margin: 0;
+    font-family: Unbounded, sans-serif;
+    font-weight: 700;
+    font-size: 24px;
+  }
+
+  .chat-not-found__text{
+    max-width: 400px;
+    margin: 0;
+    font-size: 17px;
+    line-height: 1.5;
+    color: var(--color-on-ink-secondary);
+  }
+
+  .chat-not-found__link{
+    display: flex;
+    align-items: center;
+    height: 52px;
+    margin-top: 6px;
+    padding: 0 24px;
+    border-radius: 999px;
+    background: var(--color-surface);
+    color: var(--color-text);
+    font-weight: 600;
+    text-decoration: none;
+  }
+}

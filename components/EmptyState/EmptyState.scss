@@ -1,0 +1,52 @@
+.empty-state{
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  flex: 1;
+  gap: 16px;
+  padding: 40px;
+  text-align: center;
+
+  .empty-state__bubble{
+    fill: none;
+    stroke: var(--color-ink);
+    stroke-width: 4;
+    stroke-linejoin: round;
+  }
+
+  .empty-state__wave{
+    fill: none;
+    stroke: var(--color-accent);
+    stroke-width: 4;
+    stroke-linecap: round;
+
+    &.empty-state__wave_far{
+      opacity: 0.5;
+    }
+  }
+
+  .empty-state__title{
+    margin: 0;
+    font-family: Unbounded, sans-serif;
+    font-weight: 700;
+    font-size: 26px;
+  }
+
+  .empty-state__text{
+    max-width: 380px;
+    margin: 0;
+    font-size: 17px;
+    line-height: 1.5;
+    color: var(--color-text-secondary);
+  }
+
+  .empty-state__actions{
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 10px;
+    margin-top: 8px;
+  }
+}

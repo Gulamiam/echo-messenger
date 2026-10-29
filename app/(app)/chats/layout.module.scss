@@ -1,0 +1,136 @@
+.chats{
+  display: flex;
+  flex-direction: row;
+  width: 100%;
+  height: 100vh;
+  overflow: hidden;
+  background: var(--color-bg);
+
+  .chats__sidebar{
+    display: flex;
+    flex-direction: column;
+    flex: 0 0 360px;
+    min-height: 0;
+    border-right: 1px solid var(--color-border);
+  }
+
+  .chats__header{
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-start;
+    align-items: center;
+    gap: 10px;
+    padding: 18px 18px 12px;
+  }
+
+  .chats__home{
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    gap: 10px;
+    color: var(--color-text);
+    text-decoration: none;
+  }
+
+  .chats__heading{
+    font-family: Unbounded, sans-serif;
+    font-weight: 800;
+    font-size: 22px;
+    letter-spacing: -0.02em;
+  }
+
+  .chats__new{
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    width: 44px;
+    height: 44px;
+    margin-left: auto;
+    border-radius: 50%;
+    background: var(--color-ink);
+
+    .ico-plus{
+      background-color: var(--color-on-ink);
+    }
+  }
+
+  .chats__profile{
+    border-radius: 50%;
+    text-decoration: none;
+  }
+
+  .chats__profile-placeholder{
+    width: 44px;
+    height: 44px;
+    border-radius: 50%;
+    background: var(--color-skeleton);
+  }
+
+  .chats__list-skeleton{
+    display: flex;
+    flex-direction: column;
+    gap: 2px;
+    margin: 0;
+    padding: 0 10px 12px;
+    list-style: none;
+  }
+
+  .chats__skeleton-item{
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    gap: 12px;
+    padding: 10px 12px;
+  }
+
+  .chats__skeleton-avatar{
+    flex: none;
+    width: 48px;
+    height: 48px;
+    border-radius: 50%;
+    background: var(--color-skeleton);
+  }
+
+  .chats__skeleton-lines{
+    display: flex;
+    flex-direction: column;
+    flex: 1;
+    gap: 8px;
+  }
+
+  .chats__skeleton-line{
+    width: 70%;
+    height: 14px;
+    border-radius: 7px;
+    background: var(--color-skeleton);
+
+    &.chats__skeleton-line_short{
+      width: 90%;
+      height: 10px;
+      border-radius: 5px;
+      background: var(--color-surface-muted);
+    }
+  }
+
+  .chats__list{
+    flex: 1;
+    min-height: 0;
+  }
+
+  .chats__list-error{
+    margin: 0;
+    padding: 12px 22px;
+    font-size: 15px;
+    color: var(--color-error-text);
+  }
+
+  .chats__main{
+    display: flex;
+    flex-direction: column;
+    flex: 1;
+    min-width: 0;
+    min-height: 0;
+    background: var(--color-bg-chat);
+  }
+}

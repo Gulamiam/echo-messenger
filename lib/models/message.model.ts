@@ -1,9 +1,8 @@
-import {DataType} from "csstype";
-import Attachment = DataType.Attachment;
-import {MessageStatus, UserId} from "@/lib/types/types";
+import {Attachment, MessageStatus, UserId} from "@/lib/types/types";
 
 export class MessageModel {
     id: string | null = null;                    // строкой, чтобы подходил и временный clientId
+    clientId?: string;             // id, который придумал браузер при отправке: по нему своё неотправленное сообщение находит сохранённую копию
     text: string | null = null;
     sentAt: string | null = null;
     author: { id: UserId  | null; name: string | null; color: string | null } = {id: null, name: null, color: null};

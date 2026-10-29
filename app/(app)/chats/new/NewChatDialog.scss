@@ -1,0 +1,219 @@
+.new-chat{
+  width: 100%;
+  max-width: 520px;
+  padding: 0;
+  border: 0;
+  border-radius: 28px;
+  background: var(--color-surface);
+  color: var(--color-text);
+
+  &.new-chat_modal{
+    height: min(720px, calc(100vh - 48px));
+    margin: auto;
+
+    &::backdrop{
+      background: var(--color-overlay);
+    }
+  }
+
+  &.new-chat_page{
+    height: min(720px, calc(100% - 48px));
+    margin: 24px auto;
+  }
+
+  .new-chat__body{
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+    min-height: 0;
+  }
+
+  .new-chat__header{
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    gap: 12px;
+    padding: 24px 24px 8px;
+  }
+
+  .new-chat__title{
+    flex: 1;
+    margin: 0;
+    font-family: Unbounded, sans-serif;
+    font-weight: 700;
+    font-size: 24px;
+    letter-spacing: -0.02em;
+  }
+
+  .new-chat__close{
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    width: 44px;
+    height: 44px;
+    border-radius: 50%;
+    background: var(--color-bg);
+    cursor: pointer;
+  }
+
+  .new-chat__controls{
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+    padding: 8px 24px 12px;
+  }
+
+  .new-chat__search{
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    gap: 10px;
+    height: 50px;
+    padding: 0 16px;
+    border: 1.5px solid var(--color-ink);
+    border-radius: 999px;
+  }
+
+  .new-chat__search-input{
+    flex: 1;
+    min-width: 0;
+    border: 0;
+    outline: none;
+    background: transparent;
+    font: inherit;
+    font-size: 16px;
+    color: var(--color-text);
+  }
+
+  // Текст для скринридера: на экране его заменяет иконка лупы и плейсхолдер
+  .new-chat__visually-hidden{
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    overflow: hidden;
+    clip: rect(0 0 0 0);
+  }
+
+  .new-chat__chips{
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    gap: 8px;
+  }
+
+  .new-chat__chip{
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    gap: 6px;
+    height: 36px;
+    padding: 0 10px 0 4px;
+    border-radius: 999px;
+    background: var(--color-bg);
+    color: var(--color-text);
+    font: inherit;
+    font-size: 14px;
+    font-weight: 600;
+    cursor: pointer;
+
+    .ico-close{
+      width: 14px;
+      height: 14px;
+      background-color: var(--color-text-secondary);
+    }
+  }
+
+  .new-chat__section-title{
+    padding: 4px 24px 0;
+    font-size: 13px;
+    font-weight: 700;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    color: var(--color-text-secondary);
+  }
+
+  .new-chat__list{
+    flex: 1;
+    min-height: 0;
+  }
+
+  .new-chat__people{
+    margin: 0;
+    padding: 8px 12px;
+    list-style: none;
+
+    // Пока ищем, старые результаты бледнеют: видно, что список сейчас обновится
+    &.new-chat__people_loading{
+      opacity: 0.5;
+    }
+  }
+
+  .new-chat__person{
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    gap: 12px;
+    padding: 10px 12px;
+    border-radius: 16px;
+    cursor: pointer;
+
+    &:hover{
+      background: var(--color-bg);
+    }
+  }
+
+  .new-chat__person-info{
+    display: flex;
+    flex-direction: column;
+    flex: 1;
+    min-width: 0;
+  }
+
+  .new-chat__person-name{
+    font-size: 16px;
+  }
+
+  .new-chat__person-nick{
+    font-size: 14px;
+    color: var(--color-text-secondary);
+  }
+
+  .new-chat__checkbox{
+    width: 22px;
+    height: 22px;
+    accent-color: var(--color-ink);
+  }
+
+  .new-chat__empty{
+    margin: 0;
+    padding: 16px 24px;
+    font-size: 15px;
+    color: var(--color-text-secondary);
+  }
+
+  .new-chat__footer{
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    gap: 12px;
+    padding: 16px 24px 24px;
+    border-top: 1px solid var(--color-surface-muted);
+  }
+
+  // У echo-button нет вида для неактивной кнопки, а здесь она неактивна, пока никто не выбран
+  .new-chat__footer .echo-button:disabled{
+    background: var(--color-surface-muted);
+    color: var(--color-text-secondary);
+  }
+
+  .new-chat__hint{
+    flex: 1;
+    font-size: 14px;
+    color: var(--color-text-secondary);
+
+    &.new-chat__hint_error{
+      color: var(--color-error-text);
+    }
+  }
+}

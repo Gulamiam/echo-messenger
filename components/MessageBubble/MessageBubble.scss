@@ -8,7 +8,8 @@
   gap: 4px;
 
   &.message_mine{
-    justify-content: flex-end;
+    // .message — колонка, поэтому к правому краю прижимает align-items, а не justify-content
+    align-items: flex-end;
 
     .message__name{
       display: none;
