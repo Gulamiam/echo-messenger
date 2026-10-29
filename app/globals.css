@@ -1,26 +1,147 @@
-@import "tailwindcss";
+@import url('https://fonts.googleapis.com/css2?family=Golos+Text:wght@400..900&family=Unbounded:wght@200..900&display=swap');
 
 :root {
-  --background: #ffffff;
-  --foreground: #171717;
+    /* Фоны */
+    --color-bg: #F1F1EC;              /* основной фон страниц, шапка чата */
+    --color-bg-chat: #F7F7F3;         /* фон ленты сообщений и поля ввода */
+    --color-surface: #FFFFFF;         /* карточки, чужие пузыри, поля ввода, модалки */
+    --color-surface-muted: #E4E3DC;   /* поиск, чипы, плашка даты, неактивные кнопки */
+    --color-skeleton: #DCDBD3;        /* скелетоны загрузки */
+
+    /* Границы */
+    --color-border: #D9D8D1;          /* разделители, рамка поля ввода сообщения */
+    --color-border-input: #CFCEC6;    /* рамки полей форм, пунктир загрузки фото */
+
+    /* Текст */
+    --color-text: #141414;            /* основной текст */
+    --color-text-secondary: #5A5A55;  /* подписи, время, превью сообщений */
+    --color-text-tertiary: #3D3D39;   /* второстепенный текст на светлых плашках */
+    --color-text-disabled: #8A8A84;   /* «отправляется…», точки «печатает» */
+
+    /* Тёмные элементы */
+    --color-ink: #141414;             /* свои пузыри, активный чат, главные кнопки, подвал */
+    --color-on-ink: #FFFFFF;          /* текст на тёмном */
+    --color-on-ink-secondary: #BDBDB5;/* второстепенный текст на тёмном */
+    --color-ink-border: #3D3D39;      /* рамки карточек на тёмном фоне */
+    --color-ink-divider: #2A2A27;     /* разделитель в тёмном подвале */
+
+    /* Акцент */
+    --color-accent: #FF5A2A;          /* кнопка «Отправить», счётчики непрочитанных, логотип */
+    --color-on-accent: #141414;       /* текст на акцентном фоне */
+    --color-accent-text: #C2340E;     /* акцент текстом: «печатает…», ссылки при наведении */
+
+    /* Состояния */
+    --color-success: #0E7A4F;         /* «Ник свободен», «Сохранено» */
+    --color-error: #C8261B;           /* рамка поля с ошибкой */
+    --color-error-text: #B0200F;      /* текст ошибки, «Не отправлено», «Выйти» */
+    --color-error-bg: #FFF4F2;        /* фон поля с ошибкой */
+    --color-warning-text: #6B4A00;    /* «Нет связи. Переподключаемся…» */
+    --color-warning-bg: #FFF1D6;      /* фон плашки переподключения */
+
+    /* Затемнение под модалкой */
+    --color-overlay: rgb(20 20 20 / 0.55);
+
+    /* Аватары: цвет выбирается по хешу id пользователя */
+    --avatar-1: #5B3CF5;              /* фиолетовый, текст белый */
+    --avatar-2: #FF5A2A;              /* оранжевый, текст тёмный */
+    --avatar-3: #FF7EB6;              /* розовый, текст тёмный */
+    --avatar-4: #1F6FE0;              /* синий, текст белый */
+    --avatar-5: #C6F432;              /* лаймовый, текст тёмный */
+    --avatar-6: #0E7A4F;              /* зелёный, текст белый */
+    --avatar-7: #7A4FD6;              /* сиреневый, текст белый */
+    --avatar-8: #D9D8D1;              /* серый, текст тёмный */
+
+    font-family: 'Golos Text', sans-serif;
+    color: var(--color-text);
 }
 
-@theme inline {
-  --color-background: var(--background);
-  --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
+*{
+    box-sizing: border-box;
 }
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
-  }
+html, body {
+    height: 100%;
+    width: 100%;
+    padding: 0;
+    margin: 0;
 }
 
-body {
-  background: var(--background);
-  color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+.os-scrollbar.os-theme-echo {
+    --os-size: 10px;                          /* толщина зоны скроллбара */
+    --os-padding-perpendicular: 2px;
+    --os-padding-axis: 4px;
+    --os-track-bg: transparent;
+    --os-handle-bg: #CFCEC6;
+    --os-handle-bg-hover: #8A8A84;
+    --os-handle-bg-active: #5A5A55;
+    --os-handle-border-radius: 999px;
+    --os-handle-min-size: 40px;
+}
+
+@font-face {
+    font-family: 'Golos Text';
+    font-style: normal;
+    font-display: swap;
+}
+
+@font-face {
+    font-family: 'Unbounded';
+    font-style: normal;
+    font-display: swap;
+}
+
+.echo-button{
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    width: max-content;
+    height: max-content;
+    border-radius: 999px;
+    text-decoration: none;
+    font-size: 16px;
+    padding: 12px 22px;
+    font-family: "Golos Text", sans-serif;
+
+    &:hover:not(:disabled){
+        cursor: pointer;
+        opacity: 0.9;
+    }
+
+    &.size_l{
+        padding: 16px 28px;
+        font-size: 18px;
+        font-weight: 600;
+        min-height: 60px;
+    }
+
+    &.primary{
+        background: var(--color-ink);
+        color: var(--color-on-ink);
+        font-weight: 600;
+    }
+
+    &.secondary{
+        border: 1px solid var(--color-ink);
+        background: transparent;
+        color: var(--color-ink);
+        &:disabled{
+            background: #8A8F9A;
+        }
+
+        &:hover:not(:disabled){
+            cursor: pointer;
+            color: var(--color-accent-text)
+        }
+    }
+
+    &.tertiary{
+        background: var(--color-accent);
+        color: var(--color-text);
+        font-weight: 700;
+    }
+}
+
+button{
+    border: none;
 }

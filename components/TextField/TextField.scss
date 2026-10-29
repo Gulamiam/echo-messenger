@@ -1,0 +1,104 @@
+.text-field{
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  align-items: stretch;
+  width: 100%;
+  height: max-content;
+  gap: 8px;
+
+  .text-field__label{
+    font-size: 14px;
+    font-weight: 600;
+    color: var(--color-text-secondary);
+  }
+
+  .text-field__input{
+    width: 100%;
+    min-height: 56px;
+    padding: 16px 18px;
+    border: 1px solid var(--color-border-input);
+    border-radius: 16px;
+    background: var(--color-surface);
+    color: var(--color-text);
+    font-family: "Golos Text", sans-serif;
+    font-size: 16px;
+    outline: none;
+
+    &::placeholder{
+      color: var(--color-text-disabled);
+    }
+
+    &:focus-visible{
+      border-color: var(--color-ink);
+    }
+
+    &:disabled{
+      background: var(--color-surface-muted);
+      color: var(--color-text-disabled);
+    }
+  }
+
+  // Слот лежит поверх поля, а не рядом с ним: поле остаётся во всю ширину,
+  // и подсветка автозаполнения закрывает всю область вместе с местом под иконкой
+  .text-field__control{
+    position: relative;
+  }
+
+  .text-field__end{
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    position: absolute;
+    top: 0;
+    right: 18px;
+    height: 100%;
+  }
+
+  .text-field__start{
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-start;
+    align-items: center;
+    position: absolute;
+    top: 0;
+    left: 18px;
+    height: 100%;
+    font-size: 16px;
+    color: var(--color-text-secondary);
+    // Префикс — не кнопка: клик по нему должен попадать в поле под ним
+    pointer-events: none;
+  }
+
+  .text-field__hint{
+    font-size: 14px;
+    color: var(--color-text-secondary);
+  }
+
+  .text-field__error{
+    font-size: 14px;
+    color: var(--color-error-text);
+  }
+
+  &.text-field_with-start{
+    .text-field__input{
+      // Место под префикс, чтобы текст начинался сразу после него
+      padding-left: 34px;
+    }
+  }
+
+  &.text-field_with-end{
+    .text-field__input{
+      // Место под слот, чтобы текст не уходил под иконку
+      padding-right: 56px;
+    }
+  }
+
+  &.text-field_error{
+    .text-field__input{
+      border-color: var(--color-error);
+      background: var(--color-error-bg);
+    }
+  }
+}
