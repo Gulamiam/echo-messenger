@@ -39,9 +39,10 @@ npm run dev      # dev-сервер Next (http://localhost:3000)
 npm run build    # продакшен-сборка
 npm run start    # запуск собранного
 npm run lint     # eslint (конфиги next/core-web-vitals и next/typescript)
+npm test         # юнит-тесты lib/**/*.test.ts (встроенный node:test через tsx)
 ```
 
-Тестов пока нет: папка `e2e/` заведена под будущие e2e-тесты, раннер не настроен. Изменения проверяются в браузере через `npm run dev`.
+Юнит-тесты лежат рядом с модулем (`lib/format.test.ts`). Папка `e2e/` заведена под будущие e2e-тесты, раннер для них не настроен. Изменения в UI проверяются в браузере через `npm run dev`.
 
 ## Конвенции
 
